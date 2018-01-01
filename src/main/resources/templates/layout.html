@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <th:block th:fragment="site-head">
+        <meta charset="UTF-8">
+        <link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.4/css/bootstrap.min.css">
+        <link rel="stylesheet" href="/css/footer.css">
+        <link rel="stylesheet" href="/css/sidbar.css">
+        <link rel="stylesheet" href="/css/blog.css">
+        <script src="https://cdn.bootcss.com/jquery/3.2.0/jquery.min.js"></script>
+        <script src="//cdn.bootcss.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+    </th:block>
+
+</head>
+<body>
+    <header th:fragment="site-header">
+        <nav class="navbar navbar-inverse navbar-fixed-top">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" th:href="@{/}">Blog</a>
+                </div>
+                <div id="navbar" class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav">
+                        <li><a th:href="@{/}">Home page</a></li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Account
+                                <span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li><a th:href="@{/login}">Log in</a></li>
+                                <li><a th:href="@{/register}">Sign up</a></li>
+                                <li><a th:href="@{/admin}">Blog management</a></li>
+                                <li><a th:href="@{/profile}">User profile</a></li>
+                                <li><a th:href="@{/logout}">Logout</a></li>
+                            </ul>
+                        </li>
+                        <li><a th:href="@{/blogs/create}">Write blog</a></li>
+                        <li class="dropdown" th:remove="ALL">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">More
+                                <span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li class="dropdown-header">Blog management</li>
+                                <li></li>
+                                <li class="divider"></li>
+                                <li class="dropdown-header">Account</li>
+                                <li><a href="#">更改密码</a></li>
+                                <li><a href="#">退出登录</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                    <form class="navbar-form navbar-right">
+                        <div class="form-group">
+                            <input type="text" class="form-control" placeholder="Search">
+                        </div>
+                        <button type="submit" class="btn btn-default">Search</button>
+                    </form>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+
+    <footer th:fragment="site-footer" class="nav navbar-static-bottom">
+        &copy; Shikun Li's Spring MVC Blog System, 2017
+    </footer>
+</body>
+</html>

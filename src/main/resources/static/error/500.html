@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>500 error</title>
+</head>
+<body>
+<div class="error-details"     th:text="${#httpServletRequest.getAttribute('javax.servlet.error.request_uri')}">
+    Sorry, an error has occured, Requested page not found!
+</div>
+</body>
+</html>

@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <title th:unless="${EDIT}">创建博文</title>
+  <title th:if="${EDIT}">修改博文</title>
+  <link href="/editormd/css/editormd.min.css" rel="stylesheet" type="text/css" />
+  <th:block th:insert="layout::site-head">
+
+  </th:block>
+  <script src="/editormd/editormd.js"></script>
+  <script src="/editormd/editormd.amd.js"></script>
+</head>
+
+<body>
+<header th:replace="layout::site-header"></header>
+
+<div class="container">
+
+
+  <div class="row">
+
+    <div class="col-sm-8">
+
+      <form class="form-blog" th:unless="${EDIT}" th:action="@{/blogs}" th:object="${blog}" method='post'>
+        <div class="page-header">
+          <h2 th:unless="${EDIT}">Blog creation
+          </h2>
+          <h2 th:if="${EDIT}">Blog modification
+          </h2>
+        </div>
+        <div class="form-group row">
+          <label for="title">Title</label>
+          <input type="text" class="form-control" th:field="*{title}" placeholder="Title" autofocus="">
+          <p class="alert alert-danger" th:if="${#fields.hasErrors('title')}" th:errors="*{title}">标题长度必须在2-30之间</p>
+        </div>
+        <div class="form-group row">
+          <label for="summary">Summary</label>
+          <input type="text" class="form-control" th:field="*{summary}" placeholder="Summary" autofocus="">
+          <p class="alert alert-danger" th:if="${#fields.hasErrors('summary')}" th:errors="*{summary}"></p>
+        </div>
+
+        <label for="content">Content</label>
+        <div class="editormd form-control form-group" style="margin: 0px;" id="test-editormd">
+
+          <textarea class="editormd-markdown-textarea" name="test-editormd-markdown-doc" id="editormd" th:field="*{content}"></textarea>
+
+          <textarea class="editormd-html-textarea" name="editorhtml" id="editorhtml" ></textarea>
+          <p class="alert alert-danger" th:if="${#fields.hasErrors('content')}" th:errors="*{content}">内容不可为空</p>
+        </div>
+
+        <input type="submit">
+      </form>
+
+      <form class="form-blog" th:if="${EDIT}" th:action="@{'/blogs/'+${blog.id}}" th:object="${blog}" method='post'>
+        <p>Edit</p>
+        <input type="hidden" name="_method" value="put">
+        <div class="form-group row">
+          <label for="title">Title</label>
+          <input type="text" class="form-control" th:field="*{title}" placeholder="文章标题" autofocus="">
+          <p class="alert alert-danger" th:if="${#fields.hasErrors('title')}" th:errors="*{title}">标题长度必须在2-30之间</p>
+        </div>
+        <div class="form-group row">
+          <label for="summary">Summary</label>
+          <input type="text" class="form-control" th:field="*{summary}" placeholder="Summary" autofocus="">
+          <p class="alert alert-danger" th:if="${#fields.hasErrors('summary')}" th:errors="*{summary}"></p>
+        </div>
+
+        <label for="content">Content</label>
+        <div class="editormd form-control form-group" style="margin: 0px;" id="test-editormd">
+          <textarea class="editormd-markdown-textarea" name="test-editormd-markdown-doc" id="editormd" th:field="*{content}"></textarea>
+
+          <textarea class="editormd-html-textarea" name="editorhtml" id="editorhtml"></textarea>
+          <p class="alert alert-danger" th:if="${#fields.hasErrors('content')}" th:errors="*{content}">内容不可为空</p>
+        </div>
+
+        <input class="row" type="submit">
+      </form>
+
+
+    </div>
+
+    <div class="col-sm-3 col-sm-offset-1">
+      <div class="sidebar-module sidebar-module-inset">
+        <div class="avatar">
+          <img class="img-circle img-rounded img-thumbnail avatar" th:src="@{'/avatar/'+${user.name}}">
+          <div>
+            <h4 th:text="${user.name}">Lorem</h4>
+            <a th:text="${user.email}">lorem@example.com</a>
+          </div>
+        </div>
+        <p>Ornare sapien rhoncus, nec mi hendrerit. Ante aliquam dui arcu, diam sodales erat felis dolor sed in, nec
+          placerat non.</p>
+      </div>
+      <div class="sidebar-module">
+        <h4>归档</h4>
+        <ol class="list-unstyled">
+          <li><a href="#">2015年03月</a></li>
+          <li><a href="#">2015年02月</a></li>
+          <li><a href="#">2015年01月</a></li>
+          <li><a href="#">2014年12月</a></li>
+          <li><a href="#">2014年11月</a></li>
+          <li><a href="#">2014年10月</a></li>
+          <li><a href="#">2014年09月</a></li>
+          <li><a href="#">2014年08月</a></li>
+          <li><a href="#">2014年07月</a></li>
+        </ol>
+      </div>
+    </div>
+
+  </div>
+
+</div>
+
+<footer th:replace="layout::site-footer">
+
+</footer>
+<script src="/js/Markdown.js"></script>
+</body>
+</html>

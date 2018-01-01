@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>404 error</title>
+    <th:block th:insert="/templates/layout::site-head">
+
+    </th:block>
+</head>
+<body>
+<header th:replace="/templates/layout::site-header">
+
+</header>
+<div class="error-details"     th:text="${#httpServletRequest.getAttribute('javax.servlet.error.request_uri')}">
+    Sorry, an error has occured, Requested page not found!
+</div>
+
+<footer th:replace="/templates/layout :: site-footer">
+
+</footer>
+</body>
+</html>

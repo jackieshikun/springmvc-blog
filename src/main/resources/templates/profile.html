@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+
+<head>
+  <title>User profile Setting</title>
+  <th:block th:insert="layout::site-head">
+
+  </th:block>
+</head>
+
+<body>
+<header th:replace="layout::site-header"></header>
+
+<div class="container">
+  <h1>User profile</h1>
+  <hr>
+  <div class="row">
+
+    <form class="form-horizontal" role="form" enctype="multipart/form-data" method="POST" action="/profile" th:object="${user}">
+
+    <!-- left column -->
+    <div class="col-md-3">
+      <div class="text-center">
+        <img th:src="@{'/avatar/' + ${user.name}}" style="width:100px;height:100px;" class="avatar img-circle" alt="avatar">
+        <h6>Upload avatar</h6>
+        <input type="file" class="form-control" name="file">
+      </div>
+    </div>
+
+    <!-- edit form column -->
+    <div class="col-md-9 personal-info">
+      <div class="alert alert-info alert-dismissable" th:if="${update_succ}==true">
+        <a class="panel-close close" data-dismiss="alert">×</a>
+        <strong>User info updated!</strong>
+      </div>
+      <h3>User profile</h3>
+
+        <div class="form-group">
+          <label class="col-lg-3 control-label">Username:</label>
+          <div class="col-lg-8">
+            <input class="form-control" type="text" th:field="*{name}">
+          </div>
+          <p class="alert alert-danger" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></p>
+        </div>
+        <div class="form-group">
+          <label class="col-lg-3 control-label">Intro:</label>
+          <div class="col-lg-8 clearfix">
+              <textarea id="content" name="content" rows="3"
+                    class="form-control" placeholder="Write intro" th:field="*{intro}"></textarea>
+          </div>
+          <p class="alert alert-danger" th:if="${#fields.hasErrors('intro')}" th:errors="*{intro}"></p>
+        </div>
+        <div class="form-group">
+          <label class="col-md-3 control-label">Password:</label>
+          <div class="col-md-8">
+            <input class="form-control" type="password" th:field="*{password}">
+          </div>
+          <p class="alert alert-danger" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></p>
+        </div>
+        <div class="form-group">
+          <label class="col-md-3 control-label"></label>
+          <div class="col-md-8">
+            <input type="submit" class="btn btn-primary" value="Update">
+          </div>
+        </div>
+    </div>
+    </form>
+  </div>
+</div>
+
+<footer th:replace="layout::site-footer"></footer>
+
+</body>
+</html>

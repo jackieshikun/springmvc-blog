@@ -1,0 +1,31 @@
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+
+<head>
+  <title>Login</title>
+  <th:block th:insert="layout::site-head">
+
+  </th:block>
+</head>
+
+<body>
+<header th:replace="layout::site-header"></header>
+<form class="form-signin" method="post" th:action="@{/login(next=${next})}" th:object="${user}">
+
+  <h2 class="form-signin-heading">Log in</h2>
+  <div class="alert alert-warning" th:if="${error}" th:text="${error}">
+    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+    <strong>Warning!</strong> 登陆出错了,请稍后再试!
+  </div>
+  <input type="text" th:field="*{email}" class="form-control" placeholder="email" required="" autofocus="">
+  <input type="password" th:field="*{password}" class="form-control" placeholder="password" required="">
+  <div class="checkbox">
+    <label>
+      <input type="checkbox" value="remember-me"> remember me
+    </label>
+  </div>
+  <button class="btn btn-primary btn-block" type="submit">login</button>
+</form>
+
+</body>
+
+</html>

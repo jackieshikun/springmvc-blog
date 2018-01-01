@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <title th:text="${blog.title}">Cum sociis</title>
+  <link href="/editormd/css/editormd.min.css" rel="stylesheet" type="text/css" />
+  <th:block th:insert="~{layout::site-head}">
+
+  </th:block>
+  <script src="/editormd/editormd.js"></script>
+  <script src="/editormd/editormd.amd.js"></script>
+
+  <script src="/editormd/lib/marked.min.js"></script>
+  <script src="/editormd/lib/prettify.min.js"></script>
+  <script src="/editormd/lib/flowchart.min.js"></script>
+  <script src="/editormd/lib/jquery.flowchart.min.js"></script>
+  <script src="/editormd/lib/raphael.min.js"></script>
+  <script src="/editormd/lib/underscore.min.js"></script>
+  <script src="/editormd/lib/sequence-diagram.min.js"></script>
+  <script src="/js/Markdown_display.js"></script>
+</head>
+
+<body>
+<header th:replace="layout::site-header"></header>
+
+<div class="container">
+
+  <div class="row">
+
+    <div class="col-sm-8 blog-item">
+      <div class="page-header">
+        <h2 th:text="${blog.title}">Cum sociis</h2>
+        <p class="blog-post-meta" th:text="${#dates.format(blog.createdTime, 'yyyy-MM-dd')}">2015年2月3日 标签：<a href="#">Web开发</a></p>
+      </div>
+
+      <div class="markdown-body editormd-preview-container" id = "doc-content" >
+        <textarea display="none" th:text="${blog.content}"></textarea>
+      </div>
+
+
+      <nav th:remove="All">
+        <ul class="pager">
+          <li class="previous"><a href="#"><span aria-hidden="true">&larr;</span> Previous blog</a></li>
+          <li class="next"><a href="#">Next blog <span aria-hidden="true">&rarr;</span></a></li>
+        </ul>
+      </nav>
+
+
+
+
+      <section class="comment-list">
+        <h4 class="page-header">Comments</h4>
+
+        <ul class="list-unstyled" th:each="comment:${commentList}">
+          <li class="clearfix" border="1">
+            <img th:src="@{'/avatar/' + ${comment.commentor.name}}" alt="" class="avatar pull-left">
+            <p class="content" style="border-bottom:1px solid #CCC">
+              <strong>
+                <span class="text-muted">
+                  <a th:href="'/'+${comment.commentor.name}" th:text="${comment.commentor.name}"></a>
+                </span>
+                Commented at
+                <span class="text-muted date" th:text="${#dates.format(comment.createdTime, 'yyyy-MM-dd HH:mm')}"> 2 mins ago</span>
+              </strong>
+            </p>
+            <p class="content">
+              <p class="comment-item" th:text="${comment.content}"></p>
+            </p>
+          </li>
+        </ul>
+
+
+        <form class="create-comment clearfix" th:action="@{'/blogs/' + ${id} + '/comments'}" method="POST" th:object="${comment}">
+          <textarea id="content" th:field="*{content}" name="content" rows="3"
+                    class="form-control" placeholder="Write comment"></textarea>
+          <button class="btn btn-success btn-sm btn-publish pull-right">Write comment</button>
+        </form>
+      </section>
+
+
+      <section class="comment-list" th:remove="ALL">
+        <h4 class="page-header">Comments</h4>
+        <div class="create-comment clearfix">
+          <textarea id="content" name="content" rows="3"
+                    class="form-control" placeholder="Leave your comment here"></textarea>
+          <a class="btn btn-success btn-sm btn-publish pull-right" href="#">
+            Post comments</a>
+        </div>
+
+
+
+        <ul class="list-unstyled" th:remove="ALL">
+          <li class="clearfix">
+            <img src="/img/catty.jpeg" alt="" class="avatar pull-left">
+            <p class="content">
+              <a href="#">Harttle,</a>
+              <span class="text-muted date"> 2 mins ago</span>
+              Risus. Suspendisse faucibus orci et nunc. Nullam vehicula fermentum risus. Fusce felis nibh, dignissim
+              vulputate, ultrices.
+            </p>
+          </li>
+          <li class="clearfix">
+            <img src="/img/catty.jpeg" alt="" class="avatar pull-left">
+            <p class="content">
+              <a href="#">David</a>
+              <span class="text-muted date">, yesterday</span>
+              Risus. Suspendisse faucibus orci et nunc. Nullam vehicula fermentum risus. Fusce felis nibh, dignissim
+              vulputate, ultrices.</p>
+          </li>
+        </ul>
+      </section>
+
+    </div>
+
+
+    <div class="col-sm-3 col-sm-offset-1">
+      <div class="sidebar-module sidebar-module-inset">
+      <div class="avatar">
+        <img class="img-circle img-rounded img-thumbnail avatar" th:src="@{'/avatar/' + ${username}}">
+        <div>
+          <h4 th:text="${username}">Lorem</h4>
+          <a th:text="${email}">lorem@example.com</a>
+        </div>
+      </div>
+      <p th:text="${intro}">Ornare sapien rhoncus, nec mi hendrerit. Ante aliquam dui arcu, diam sodales erat felis dolor sed in, nec
+        placerat non.</p>
+      </div>
+      <div class="sidebar-module" th:remove="ALL">
+        <h4>归档</h4>
+        <ol class="list-unstyled">
+          <li><a href="#">2015年03月</a></li>
+          <li><a href="#">2015年02月</a></li>
+          <li><a href="#">2015年01月</a></li>
+          <li><a href="#">2014年12月</a></li>
+          <li><a href="#">2014年11月</a></li>
+          <li><a href="#">2014年10月</a></li>
+          <li><a href="#">2014年09月</a></li>
+          <li><a href="#">2014年08月</a></li>
+          <li><a href="#">2014年07月</a></li>
+        </ol>
+      </div>
+    </div>
+
+  </div>
+
+</div>
+
+<footer th:replace="layout::site-footer"></footer>
+
+</body>
+</html>

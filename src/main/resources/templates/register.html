@@ -1,0 +1,27 @@
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+
+<head >
+  <title>signup</title>
+  <th:block th:insert="layout::site-head">
+
+  </th:block>
+</head>
+
+<body>
+<header th:replace="layout::site-header"></header>
+
+<form class="form-signin" th:action="@{/register}" th:method="POST" th:object="${user}">
+  <h2 class="form-signin-heading">Sign up</h2>
+  <input type="email" id="email" th:field=*{email} class="form-control" placeholder="email" required="" autofocus="">
+  <p class="alert alert-danger" th:if="${#fields.hasErrors('email')}" th:errors="*{email}">Email error</p>
+
+  <input type="text" id="name" th:field=*{name} class="form-control" placeholder="username" required="" autofocus="">
+  <p class="alert alert-danger" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">username is invalid</p>
+  <input type="password" id="password" th:field="*{password}" class="form-control" placeholder="password" required="">
+  <p class="alert alert-danger" th:if="${#fields.hasErrors('password')}" th:errors="*{password}">password is invalid</p>
+  <button class="btn btn-primary btn-block" type="submit">Sign up</button>
+</form>
+
+</body>
+
+</html>

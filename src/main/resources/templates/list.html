@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+
+<head>
+  <title th:text="'Welcome to'+ ${username} + '\'s blog'"></title>
+  <th:block th:insert="layout::site-head">
+
+  </th:block>
+</head>
+
+<body>
+<header th:replace="layout::site-header"></header>
+
+<div class="container">
+
+  <div class="page-header">
+    <h1 th:text="${username} + '\'s Blog'">Lorem's blog
+      <small>Mi nunc congue nunc, ante felis vestibulum bibendum.</small>
+    </h1>
+  </div>
+
+  <div class="row">
+
+    <div class="col-sm-8">
+      <div class="blog-post" th:each="blog,blogStat:${blogList}">
+        <h3 class="blog-post-title">
+          <a th:text="${blog.title}" th:href="@{'/blogs/' + ${blog.id}}"></a>
+        </h3>
+        <p class="blog-post-meta" th:text="${#dates.format(blog.createdTime, 'yyyy-MM-dd')}"></p>
+        <p class="blog-post-content" th:text="${blog.summary}"></p>
+      </div>
+
+
+
+      <nav>
+        <ul class="pager">
+          <li th:unless="${blogList.first}" class="previous"><a th:href="@{${username}+'?page=' + ${blogList.number} + '&size=' + ${blogList.size}}"><span aria-hidden="true">&larr;</span> Previous page</a></li>
+          <li th:unless=${blogList.last} class="next"><a th:href="@{${username}+'?page=' + ${blogList.number + 2} + '&size=' + ${blogList.size}}">Next page <span aria-hidden="true">&rarr;</span></a></li>
+        </ul>
+      </nav>
+
+    </div>
+
+    <div class="col-sm-3 col-sm-offset-1">
+      <div class="sidebar-module sidebar-module-inset">
+        <div class="avatar">
+          <img class="img-circle img-rounded img-thumbnail avatar" th:src="@{'/avatar/' + ${username}}">
+          <div>
+            <h4 th:text="${username}">Lorem</h4>
+            <a th:text="${email}">lorem@example.com</a>
+          </div>
+        </div>
+        <p th:text="${intro}">Ornare sapien rhoncus, nec mi hendrerit. Ante aliquam dui arcu, diam sodales erat felis dolor sed in, nec
+          placerat non.</p>
+      </div>
+      <div class="sidebar-module" th:remove="ALL">
+        <h4>归档</h4>
+        <ol class="list-unstyled">
+          <li><a href="#">2015年03月</a></li>
+          <li><a href="#">2015年02月</a></li>
+          <li><a href="#">2015年01月</a></li>
+          <li><a href="#">2014年12月</a></li>
+          <li><a href="#">2014年11月</a></li>
+          <li><a href="#">2014年10月</a></li>
+          <li><a href="#">2014年09月</a></li>
+          <li><a href="#">2014年08月</a></li>
+          <li><a href="#">2014年07月</a></li>
+        </ol>
+      </div>
+    </div>
+
+  </div>
+
+</div>
+
+<footer th:replace="layout::site-footer">
+
+</footer>
+
+</body>
+</html>
