@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpSession;
 import javax.websocket.Session;
@@ -19,9 +20,10 @@ public class LoginController {
     UserService userService;
 
     @GetMapping
-    public String get(@RequestParam(value = "next", required = false) Optional<String> next
-            ,Model model,
-                      HttpSession session) {
+    public String get(@RequestParam(value = "next", required = false) Optional<String> next,
+                      Model model,
+                      HttpSession session,
+                      @ModelAttribute("error") String error) {
         //System.out.println("next is " + next.get());
         if(next.isPresent())
             model.addAttribute("next", next.get());
@@ -36,17 +38,19 @@ public class LoginController {
     }
 
     @PostMapping
-    public String post(@RequestParam(value = "next", required = false) Optional<String> next
-            ,User user,
+    public String post(@RequestParam(value = "next", required = false) Optional<String> next,
+                       User user,
                        Model model,
-                       HttpSession session) {
+                       HttpSession session,
+                       final RedirectAttributes redirectAttributes) {
         User realUser = userService.login(user.getEmail(), user.getPassword());
-        //System.out.println(next);
         session.removeAttribute("NEXT");
         if(realUser == null){
-            model.addAttribute("error","Email or username is wrong");
-            if(!next.isPresent())
+            if(!next.isPresent()){
+                model.addAttribute("error","Email or username is wrong");
                 return "login";
+            }
+            redirectAttributes.addFlashAttribute("error","Email or username is wrong");
             return "redirect:/login?next=" + next.get();
         }
         session.setAttribute("CURRENT_USER", realUser);

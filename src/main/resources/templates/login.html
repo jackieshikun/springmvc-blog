@@ -26,9 +26,9 @@
                     <div class="card-body">
                         <h4 class="card-title">Login</h4>
 
-                        <div class="alert alert-warning" th:if="${error}" th:text="${error}">
-                        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-                        <strong>Warning!</strong> Log in failed, please try again
+                        <div class="alert alert-warning" th:if="${#strings.isEmpty(error)}==false" th:text="${error}">
+                            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                            <strong>Warning!</strong> Log in failed, please try again
                         </div>
 
                         <form th:method="POST" th:action="@{/login(next=${next})}" th:object="${user}">
