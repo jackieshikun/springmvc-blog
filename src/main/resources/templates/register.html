@@ -1,27 +1,82 @@
-<html xmlns:th="http://www.w3.org/1999/xhtml">
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8">
+    <meta name="author" content="Kodinger">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>My Login Page</title>
+    <th:block th:insert="layout::site-head">
 
-<head >
-  <title>signup</title>
-  <th:block th:insert="layout::site-head">
-
-  </th:block>
+    </th:block>
+    <link rel="stylesheet" type="text/css" href="/css/my-login.css">
+    <script src="/js/my-login.js"></script>
 </head>
+<body class="my-login-page">
 
-<body>
-<header th:replace="layout::site-header"></header>
+<header th:replace="layout::header">
 
-<form class="form-signin" th:action="@{/register}" th:method="POST" th:object="${user}">
-  <h2 class="form-signin-heading">Sign up</h2>
-  <input type="email" id="email" th:field=*{email} class="form-control" placeholder="email" required="" autofocus="">
-  <p class="alert alert-danger" th:if="${#fields.hasErrors('email')}" th:errors="*{email}">Email error</p>
+</header>
 
-  <input type="text" id="name" th:field=*{name} class="form-control" placeholder="username" required="" autofocus="">
-  <p class="alert alert-danger" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">username is invalid</p>
-  <input type="password" id="password" th:field="*{password}" class="form-control" placeholder="password" required="">
-  <p class="alert alert-danger" th:if="${#fields.hasErrors('password')}" th:errors="*{password}">password is invalid</p>
-  <button class="btn btn-primary btn-block" type="submit">Sign up</button>
-</form>
+
+<section class="h-100">
+    <div class="container h-100">
+        <div class="row justify-content-md-center h-100">
+            <div class="card-wrapper">
+                <div class="brand">
+                    <img src="/img/logo.jpg">
+                </div>
+                <div class="card fat">
+                    <div class="card-body">
+                        <h4 class="card-title">Register</h4>
+                        <form th:method="POST" th:action="@{/register}" th:object="${user}">
+
+                            <div class="form-group">
+                                <label for="name">Name</label>
+                                <input id="name" type="text" class="form-control" name="name" th:field="*{name}" required autofocus>
+                                <p class="alert alert-danger" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">username is invalid</p>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="email">E-Mail Address</label>
+                                <input id="email" type="email" class="form-control" name = "email" th:field="*{email}" required>
+                                <p class="alert alert-danger" th:if="${#fields.hasErrors('email')}" th:errors="*{email}">Email error</p>
+
+                            </div>
+
+                            <div class="form-group">
+                                <label for="password">Password</label>
+                                <input id="password" type="password" class="form-control" name="password" th:field="*{password}" required data-eye>
+                                <p class="alert alert-danger" th:if="${#fields.hasErrors('password')}" th:errors="*{password}">password is invalid</p>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="password">Confirm password</label>
+                                <input id="confirm" type="password" class="form-control" name="confirm" required data-eye>
+                                <p class="alert alert-danger" id="msg" hidden="true">Two passwords are different, try it again</p>
+                            </div>
+
+                            <div class="form-group">
+                                <label>
+                                    <input type="checkbox" name="aggree" id="agree"> I agree to the Terms and Conditions
+                                </label>
+                            </div>
+
+                            <div class="form-group no-margin">
+                                <button type="submit" class="btn btn-primary btn-block" id="submit" disabled="true">
+                                    Register
+                                </button>
+                            </div>
+                            <div class="margin-top20 text-center">
+                                Already have an account? <a href="login.html">Login</a>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</section>
 
 </body>
-
 </html>

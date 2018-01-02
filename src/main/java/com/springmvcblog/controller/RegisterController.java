@@ -32,12 +32,17 @@ public class RegisterController {
     public String post(@ModelAttribute("user") @Valid UserRegisterForm userRegisterForm,
                        BindingResult result,
                        HttpSession session,
-                       final RedirectAttributes redirectAttributes) {
+                       final RedirectAttributes redirectAttributes,
+                       Model model) {
         //Your code goes here
         if(result.hasErrors()){
             return "register";
         }
         User user = userRegisterForm.toUser();
+        if(userService.findByEmail(user.getEmail()) != null){
+            model.addAttribute("message", "Email is already registered, please try another one");
+            return "register";
+        }
         userService.register(user);
         session.setAttribute("CURRENT_USER", user);
         redirectAttributes.addFlashAttribute("message", "user created");

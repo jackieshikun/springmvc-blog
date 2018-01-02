@@ -1,31 +1,76 @@
-<html xmlns:th="http://www.w3.org/1999/xhtml">
+<!DOCTYPE html>
+<html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+    <meta charset="utf-8">
+    <meta name="author" content="Kodinger">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>My Login Page &mdash; Bootstrap 4 Login Page Snippet</title>
+    <th:block th:insert="layout::head">
 
-<head>
-  <title>Login</title>
-  <th:block th:insert="layout::site-head">
-
-  </th:block>
+    </th:block>
+    <link rel="stylesheet" type="text/css" href="/css/my-login.css">
+    <script src="/js/my-login.js"></script>
 </head>
+<body class="my-login-page">
 
-<body>
-<header th:replace="layout::site-header"></header>
-<form class="form-signin" method="post" th:action="@{/login(next=${next})}" th:object="${user}">
+<header th:replace="layout::header"></header>
 
-  <h2 class="form-signin-heading">Log in</h2>
-  <div class="alert alert-warning" th:if="${error}" th:text="${error}">
-    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-    <strong>Warning!</strong> 登陆出错了,请稍后再试!
-  </div>
-  <input type="text" th:field="*{email}" class="form-control" placeholder="email" required="" autofocus="">
-  <input type="password" th:field="*{password}" class="form-control" placeholder="password" required="">
-  <div class="checkbox">
-    <label>
-      <input type="checkbox" value="remember-me"> remember me
-    </label>
-  </div>
-  <button class="btn btn-primary btn-block" type="submit">login</button>
-</form>
+<section class="h-100">
+    <div class="container h-100">
+        <div class="row justify-content-md-center h-100">
+            <div class="card-wrapper">
+                <div class="brand">
+                    <img src="/img/logo.jpg">
+                </div>
+                <div class="card fat">
+                    <div class="card-body">
+                        <h4 class="card-title">Login</h4>
+
+                        <div class="alert alert-warning" th:if="${error}" th:text="${error}">
+                        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                        <strong>Warning!</strong> Log in failed, please try again
+                        </div>
+
+                        <form th:method="POST" th:action="@{/login(next=${next})}" th:object="${user}">
+
+                            <div class="form-group">
+                                <label for="email">E-Mail Address</label>
+
+                                <input id="email" type="email" class="form-control" name="email" th:field="*{email}" value="" required autofocus>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="password">Password
+                                    <a href="#" class="float-right">
+                                        Forgot Password?
+                                    </a>
+                                </label>
+                                <input id="password" type="password" class="form-control" name="password" th:field="*{password}" required data-eye>
+                            </div>
+
+                            <div class="form-group">
+                                <label>
+                                    <input type="checkbox" name="remember"> Remember Me
+                                </label>
+                            </div>
+
+                            <div class="form-group no-margin">
+                                <button type="submit" class="btn btn-primary btn-block">
+                                    Login
+                                </button>
+                            </div>
+                            <div class="margin-top20 text-center">
+                                Don't have an account? <a href="register.html">Create One</a>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</section>
+
 
 </body>
-
 </html>

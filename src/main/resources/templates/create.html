@@ -3,8 +3,8 @@
       xmlns:th="http://www.thymeleaf.org">
 
 <head>
-  <title th:unless="${EDIT}">创建博文</title>
-  <title th:if="${EDIT}">修改博文</title>
+  <title th:unless="${EDIT}">Create blog</title>
+  <title th:if="${EDIT}">Edit blog</title>
   <link href="/editormd/css/editormd.min.css" rel="stylesheet" type="text/css" />
   <th:block th:insert="layout::site-head">
 

@@ -34,4 +34,6 @@ public interface UserService {
 
     User findByName(String username);
 
+    User findByEmail(String email);
+
 }
