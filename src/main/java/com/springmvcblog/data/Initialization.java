@@ -25,7 +25,11 @@ public class Initialization implements CommandLineRunner {
 
     @Override
     public void run(String... strings) throws Exception {
-
+        if(userService.findByEmail("jackieshikun@gmail.com") == null){
+            User user = new User("shikun", "jackieshikun@gmail.com");
+            user.setPassword("123456");
+            userService.register(user);
+        }
     }
 
     private User createUser(String name, String email) {

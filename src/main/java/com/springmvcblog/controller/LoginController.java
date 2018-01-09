@@ -54,7 +54,6 @@ public class LoginController {
             return "redirect:/login?next=" + next.get();
         }
         session.setAttribute("CURRENT_USER", realUser);
-        //System.out.println(next.get());
         if(!next.isPresent())
             return "redirect:/" + realUser.getName();
         return "redirect:" + next.get();
