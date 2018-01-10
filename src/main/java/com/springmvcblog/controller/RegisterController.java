@@ -43,6 +43,10 @@ public class RegisterController {
             model.addAttribute("message", "Email is already registered, please try another one");
             return "register";
         }
+        if(userService.findByName(user.getName()) != null){
+            model.addAttribute("message", "Username is already registered, please try another one");
+            return "register";
+        }
         userService.register(user);
         session.setAttribute("CURRENT_USER", user);
         redirectAttributes.addFlashAttribute("message", "user created");

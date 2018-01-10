@@ -24,7 +24,6 @@ public class LoginController {
                       Model model,
                       HttpSession session,
                       @ModelAttribute("error") String error) {
-        //System.out.println("next is " + next.get());
         if(next.isPresent())
             model.addAttribute("next", next.get());
         User user = (User)session.getAttribute("CURRENT_USER");
@@ -54,7 +53,7 @@ public class LoginController {
             return "redirect:/login?next=" + next.get();
         }
         session.setAttribute("CURRENT_USER", realUser);
-        if(!next.isPresent())
+        if(!next.isPresent() || next.get().length() == 0)
             return "redirect:/" + realUser.getName();
         return "redirect:" + next.get();
     }

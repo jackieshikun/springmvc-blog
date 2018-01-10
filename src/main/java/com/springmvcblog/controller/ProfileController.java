@@ -33,7 +33,6 @@ public class ProfileController {
     @Autowired
     public void rootPath(@Value("${file.dir}") String root){
         ROOT = root;
-        System.out.println("=========" + ROOT + "=======");
     }
 
     @Autowired

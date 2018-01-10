@@ -50,7 +50,7 @@
           <p class="alert alert-danger" th:if="${#fields.hasErrors('content')}" th:errors="*{content}">内容不可为空</p>
         </div>
 
-        <input type="submit">
+        <input class="btn btn-primary" type="submit">
       </form>
 
       <form class="form-blog" th:if="${EDIT}" th:action="@{'/blogs/'+${blog.id}}" th:object="${blog}" method='post'>
@@ -75,7 +75,7 @@
           <p class="alert alert-danger" th:if="${#fields.hasErrors('content')}" th:errors="*{content}">内容不可为空</p>
         </div>
 
-        <input class="row btn btn-success btn-sm btn-publish pull-right" type="submit">
+        <input class="btn btn-primary" type="submit">
       </form>
 
 

@@ -25,10 +25,11 @@ public class Initialization implements CommandLineRunner {
 
     @Override
     public void run(String... strings) throws Exception {
-        if(userService.findByEmail("jackieshikun@gmail.com") == null){
-            User user = new User("shikun", "jackieshikun@gmail.com");
+        if(userService.findByEmail("jackyshikun@gmail.com") == null){
+            User user = new User("shikun", "jackyshikun@gmail.com");
             user.setPassword("123456");
             userService.register(user);
+            createBlog("Hello world", "Welcome to blog", user);
         }
     }
 
