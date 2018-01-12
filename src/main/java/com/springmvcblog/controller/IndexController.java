@@ -35,8 +35,6 @@ public class IndexController {
                             @RequestParam(value = "page", required = false, defaultValue = "1") int page,
                             @RequestParam(value = "size", required = false, defaultValue = "5") int size,
                             Model model) {
-        // Your Code goes here
-        // 渲染模板list.html
         User user = userService.findByName(username);
         Sort sort = new Sort(Sort.Direction.DESC,"id");
         Pageable pageable = new PageRequest(page-1, size, sort);
@@ -49,7 +47,10 @@ public class IndexController {
     }
 
     @GetMapping("/")
-    public String index(){
+    public String index(HttpSession session){
+        User user = (User)session.getAttribute("CURRENT_USER");
+        if(user != null)
+            return "redirect:/" + user.getName();
         return "redirect:/shikun";
     }
 

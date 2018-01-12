@@ -34,6 +34,8 @@ public interface UserService {
 
     User findByName(String username);
 
+    boolean isNameExisted(String username);
+
     User findByEmail(String email);
 
 }

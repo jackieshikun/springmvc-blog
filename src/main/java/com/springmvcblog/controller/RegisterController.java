@@ -43,7 +43,7 @@ public class RegisterController {
             model.addAttribute("message", "Email is already registered, please try another one");
             return "register";
         }
-        if(userService.findByName(user.getName()) != null){
+        if(userService.isNameExisted(user.getName()) == true){
             model.addAttribute("message", "Username is already registered, please try another one");
             return "register";
         }
