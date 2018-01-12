@@ -1,6 +1,6 @@
 # springmvc-blog
 
-Using SpringMVC, SpringJPA, MySQL to develop a blog system. Users can create/edit/delete/comment blogs. Other than that, users could design theirs profile, such as changing username, avatar and password.
+Using Thymeleaf, SpringMVC, SpringJPA, MySQL to develop a blog system. Users can create/edit/delete/comment blogs. Other than that, users could design theirs profile, such as changing username, avatar and password.
 
 In addition, I introduces markdown to the blog system, which means users could use markdown grammer to edit their blogs.
 
